@@ -13,7 +13,7 @@ interface Project {
   link: string;
   tech: { icon: React.ReactNode; label: string }[];
   status: string;
-  color: string; 
+  color: string; // For the accent color (green, blue, etc.)
 }
 
 export default function Projects() {
@@ -27,10 +27,10 @@ export default function Projects() {
       status: "System Online",
       color: "text-green-400",
       tech: [
-        { icon: <Cpu size={14} />, label: "Python" },
-        { icon: <Database size={14} />, label: "MySQL" },
+        { icon: <Cpu size={14} />, label: "Python / Flask" },
+        { icon: <Database size={14} />, label: "MySQL / Redis" },
         { icon: <Shield size={14} />, label: "Docker" },
-        { icon: <Activity size={14} />, label: "Gemini" }
+        { icon: <Activity size={14} />, label: "Gemini AI" }
       ]
     },
     {
@@ -38,13 +38,13 @@ export default function Projects() {
       title: "ChatStream",
       subtitle: "Real-Time Messaging Engine",
       description: "Bidirectional communication platform using WebSockets for instant message delivery without page refreshes.",
-      link: "https://github.com/Harzh-k/chatroom.git", 
-      status: "Archived",
+      link: "https://github.com/Harzh-k/ChatStream", 
+      status: "Deployed",
       color: "text-blue-400",
       tech: [
         { icon: <Coffee size={14} />, label: "Java" },
         { icon: <Leaf size={14} />, label: "Spring Boot" },
-        { icon: <MessageSquare size={14} />, label: "WebSocket" }
+        { icon: <MessageSquare size={14} />, label: "WebSockets" }
       ]
     },
     {
@@ -52,7 +52,7 @@ export default function Projects() {
       title: "PayMaster",
       subtitle: "Payroll Management System",
       description: "Automated HR platform for managing employee payroll, leave requests, and salary records with a full Admin panel.",
-      link: "https://github.com/Harzh-k/Payroll_management_system.git", 
+      link: "https://github.com/Harzh-k/PayMaster", 
       status: "Archived",
       color: "text-purple-400",
       tech: [
@@ -65,14 +65,15 @@ export default function Projects() {
       id: "04",
       title: "MediBook",
       subtitle: "Hospital Appointment System",
-      description: "Web-based booking system for managing doctor schedules and patient appointments with CRUD operations.",
-      link: "https://github.com/Harzh-k/Hospital_system.git", 
+      description: "A web-based booking system for managing doctor schedules and patient appointments with CRUD operations.",
+      link: "https://github.com/Harzh-k/MediBook", 
       status: "Archived",
       color: "text-red-400",
       tech: [
-        { icon: <Coffee size={14} />, label: "Java" },
+        { icon: <Coffee size={14} />, label: "Java / JSP" },
         { icon: <Database size={14} />, label: "MySQL" },
-        { icon: <Layout size={14} />, label: "HTML/CSS" }
+        { icon: <FileText size={14} />, label: "Servlets" },
+        { icon: <Layout size={14} />, label: "HTML / CSS" }
       ]
     }
   ]
@@ -83,7 +84,7 @@ export default function Projects() {
   return (
     <section className="min-h-screen w-full bg-zinc-950 text-white py-24 px-4 relative flex flex-col items-center">
       
-      <div className="max-w-6xl w-full">
+      <div className="max-w-5xl w-full">
         
         {/* Header */}
         <div className="mb-16 flex items-center gap-4">
@@ -95,7 +96,7 @@ export default function Projects() {
 
         <div className="flex flex-col gap-12">
           
-          {/* 1. MAIN PROJECT (Big Card) */}
+          {/* 1. MAIN PROJECT (Big Card - Single Column) */}
           <MainProjectCard project={mainProject} />
 
           {/* Divider Label */}
@@ -129,8 +130,8 @@ function MainProjectCard({ project }: { project: Project }) {
        {/* Scanline */}
        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/5 to-transparent -skew-x-12 translate-x-[-200%] group-hover:animate-scan pointer-events-none z-0" />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 relative z-10">
-        <div className="p-8 md:p-12 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-zinc-800 bg-zinc-900/50">
+      {/* Content takes full width (Previously only the Left side) */}
+      <div className="p-8 md:p-12 relative z-10">
           
           <div className="flex items-center gap-3 mb-6">
             <span className="relative flex h-3 w-3">
@@ -140,41 +141,31 @@ function MainProjectCard({ project }: { project: Project }) {
             <span className={`${project.color} text-xs font-mono tracking-[0.2em] uppercase`}>{project.status}</span>
           </div>
 
-          <h3 className="text-5xl font-black text-white mb-2 tracking-tight">{project.title}</h3>
+          <h3 className="text-4xl font-black text-white mb-2 tracking-tight">{project.title}</h3>
           <p className="text-zinc-500 font-mono text-sm mb-6 tracking-wide">{project.subtitle}</p>
-          <p className="text-gray-400 leading-relaxed mb-8 text-lg">{project.description}</p>
 
-          <div className="grid grid-cols-2 gap-3 mb-8">
-              {project.tech.map((t, i) => (
-                <TechItem key={i} icon={t.icon} text={t.label} />
-              ))}
+          <p className="text-gray-400 leading-relaxed mb-10 text-lg">{project.description}</p>
+          
+          {/* --- REMOVED: Screenshot Placeholder and Visual Section --- 
+             The entire right column and the screenshot div are gone.
+          */}
+          
+
+          {/* Footer: Tech Stack and Link */}
+          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-6 pt-6 border-t border-zinc-800">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {project.tech.map((t, i) => (
+                    <TechItem key={i} icon={t.icon} text={t.label} />
+                ))}
+            </div>
+            <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-bold text-sm uppercase tracking-widest hover:bg-purple-500 hover:text-white transition-all duration-300 rounded-lg w-fit">
+                <span>Launch System</span>
+                <ExternalLink size={18} />
+            </a>
           </div>
 
-          <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-bold text-sm uppercase tracking-widest hover:bg-purple-500 hover:text-white transition-all duration-300 rounded-lg w-fit">
-            <span>Launch System</span>
-            <ExternalLink size={18} />
-          </a>
-        </div>
 
-        <div className="relative min-h-[300px] bg-zinc-950 flex items-center justify-center p-12 overflow-hidden">
-            {/* Abstract Art */}
-            <div className="w-full aspect-square max-w-sm bg-zinc-900 rounded-2xl border border-zinc-800 p-6 shadow-2xl transform rotate-3 group-hover:rotate-0 transition-transform duration-500">
-                <div className="flex gap-2 mb-6">
-                    <div className="w-3 h-3 rounded-full bg-red-500/20" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/20" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/20" />
-                </div>
-                <div className="space-y-4">
-                    <div className={`h-12 w-1/2 rounded-lg animate-pulse ${project.color.replace('text-', 'bg-')}/20`} />
-                    <div className="h-32 w-full bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-xl border border-zinc-700/50" />
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="h-20 bg-zinc-800/50 rounded-xl" />
-                        <div className="h-20 bg-zinc-800/50 rounded-xl" />
-                    </div>
-                </div>
-            </div>
         </div>
-      </div>
     </motion.div>
   )
 }

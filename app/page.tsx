@@ -17,20 +17,25 @@ export default function Home() {
         <Hero />
       </section>
       
+
+
       {/* Section 2: Loadout (Skills) */}
       <section id="inventory">
         <Inventory />
-      </section>
-      
-      {/* Section 3: History (Experience) */}
-      <section id="experience">
-        <Experience />
       </section>
       
       {/* Section 4: Missions (Projects) */}
       <section id="projects">
         <Projects />
       </section>
+
+
+      {/* Section 3: History (Experience) */}
+      <section id="experience">
+        <Experience />
+      </section>
+      
+      
 
       {/* Section 5: Uplink (Contact) */}
       <section id="contact">
